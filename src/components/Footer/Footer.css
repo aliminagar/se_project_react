@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Align text vertically */
+  height: 40px; /* Slightly increase height for better spacing */
+  margin-top: 30px; /* Reduce margin to move it up */
+  margin-bottom: 10px; /* Adjust spacing from bottom */
+  color: #000000;
+  padding: 10px;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+}

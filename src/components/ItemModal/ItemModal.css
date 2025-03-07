@@ -1,0 +1,45 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal__content_type_image {
+  max-width: 498px;
+  max-height: 610px;
+  margin-top: -80px;
+  width: 100%;
+  min-width: auto;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+  padding: 0;
+}
+.modal__image {
+  max-width: 498px;
+  max-height: 498px;
+  width: 100%;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.modal__caption {
+  border-radius: 16px;
+  margin: 0;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+}
+.modal__weather {
+  gap: 12px;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+.modal__footer {
+  padding: 20px 32px 32px 32px;
+  background: white;
+}
+.modal__close {
+  background: url("/src/assets/Union.png") center no-repeat;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
