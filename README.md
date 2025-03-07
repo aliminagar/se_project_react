@@ -26,19 +26,19 @@
 
 This is an example of the pop-up interface where users can add a new clothing item by specifying the name, image URL, and selecting the appropriate weather category.
 
-![Add Clothes Popup](src/assets/Add%20clothes%20popup.png)
+![Add Clothes Popup](src/assets/Add_clothes_popup.png)
 
 ### **2. Garment Preview**
 
 Once a user adds a garment, they can view it in a larger modal to see details such as the name and weather category.
 
-![Garment Preview](src/assets/Garment%20popup%20v1.png)
+![Garment Preview](src/assets/Garment_popup_v1.png)
 
 ### **3. Main Page**
 
 The main page dynamically displays the weather information and suggests suitable clothing based on the current conditions.
 
-![Main Page](src/assets/Main%201440px.png)
+![Main Page](src/assets/Main_1440px.png)
 
 ## How It Works
 
