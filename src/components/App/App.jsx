@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
-// import { Route, Routes } from "react-router-dom";
-// import currentTemperatureUnit from "../../contexts/currentTemperatureUnitContext.js";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
@@ -12,7 +10,6 @@ import { coordinates, APIkey } from "../../utils/constants";
 import Footer from "../Footer/Footer";
 
 function App() {
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [weatherData, setWeatherData] = useState({
     type: "cold",
     temp: { F: 999 },
@@ -45,9 +42,6 @@ function App() {
 
   return (
     <div className="page">
-      {/* <currentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-      > */}
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
@@ -123,7 +117,6 @@ function App() {
         handleCloseClick={closeActiveModal}
       />
       <Footer></Footer>
-      {/* </currentTemperatureUnitContext.Provider> */}
     </div>
   );
 }
