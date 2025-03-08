@@ -1,5 +1,11 @@
 # WTWR (What to Wear)
 
+## Live Demo
+
+## Live Demo
+
+Check out the project here: [What to Wear - Weather Station](https://aliminagar.github.io/se_project_react/)
+
 ## Overview
 
 **WTWR (What to Wear)** is a dynamic web application designed to provide clothing suggestions based on real-time weather data. Using the **OpenWeather API**, the application retrieves the current temperature of a user's location and recommends suitable clothing items. Additionally, users can manage their wardrobe by adding garments and categorizing them based on weather conditions.
