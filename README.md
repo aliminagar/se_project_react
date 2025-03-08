@@ -1,5 +1,7 @@
 # WTWR (What to Wear)
 
+To begin with this has been an exciting project.
+
 ## Live Demo
 
 ## Live Demo
