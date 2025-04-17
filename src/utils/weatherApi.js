@@ -12,12 +12,19 @@ export const getWeather = ({ longitude, latitude }) => {
   });
 };
 export const filterWeatherData = (data) => {
+  const tempF = data.main.temp;
+  const tempC = ((tempF - 32) * 5) / 9;
+
   const result = {};
   result.city = data.name;
-  result.temp = { F: data.main.temp };
-  result.type = getWeatherType(result.temp.F);
-  result.condition = data.weather[0].main.toLowerCase(); // used () after toLowerCase because it is a function
-  result.isDay = isDay(data.sys, Date.now()); // used isDay with D in uppercase because it is how you call it in weatherCard
+  result.temp = {
+    F: tempF,
+    C: tempC,
+  };
+  result.type = getWeatherType(tempF);
+  result.condition = data.weather[0].main.toLowerCase();
+  result.isDay = isDay(data.sys, Date.now());
+
   return result;
 };
 
