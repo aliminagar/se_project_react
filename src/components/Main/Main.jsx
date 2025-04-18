@@ -5,35 +5,32 @@ import { defaultClothingItems } from "../../utils/constants";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ weatherData, handleCardClick, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const temperature = weatherData.temp[currentTemperatureUnit]?.toFixed(1); // Rounds to 1 decimal
+  const temperature = weatherData.temp[currentTemperatureUnit]?.toFixed(1);
+
+  // Use the clothingItems from props instead of defaultClothingItems
+  const itemsToRender =
+    clothingItems.length > 0 ? clothingItems : defaultClothingItems;
 
   return (
     <main>
-      <WeatherCard
-        weatherData={weatherData}
-        currentTemperatureUnit={currentTemperatureUnit}
-      />
+      <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
           Today is {temperature}°{currentTemperatureUnit} / You may want to
           wear:
         </p>
         <ul className="cards__list">
-          {defaultClothingItems
-            .filter((item) => {
-              return item.weather === weatherData.type;
-            })
-            .map((item) => {
-              return (
-                <ItemCard
-                  key={item._id}
-                  item={item}
-                  onCardClick={handleCardClick}
-                />
-              );
-            })}
+          {itemsToRender
+            .filter((item) => item.weather === weatherData.type)
+            .map((item) => (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={handleCardClick}
+              />
+            ))}
         </ul>
       </section>
     </main>

@@ -41,7 +41,6 @@
   box-sizing: border-box;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  width: 496px;
   height: 436px;
   border-radius: 20px;
 }
@@ -51,6 +50,7 @@
   flex-direction: column;
   width: 100%;
   gap: 24px;
+  align-items: flex-start; /* Change from flex-end to flex-start */
 }
 
 .modal__input {
@@ -70,18 +70,27 @@
   flex-direction: column;
   gap: 8px;
   font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  align-items: flex-start; /* Align items to the left */
+  width: 100%; /* Ensure full width */
 }
 
-.modal__submit {
-  background: rgba(0, 0, 0, 0.3);
-  margin-right: 344px;
+.modal_submit {
+  background: rgba(0, 0, 0, 0.3); /* Gray when inactive */
   color: white;
   font-weight: 700;
-  width: 124px;
+  width: auto;
+  min-width: 100px;
+  max-width: 124px;
   height: 36px;
+  padding: 0 12px;
   font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
 }
-
+.modal_submit.modal__submit_active {
+  background: #000 !important; /* Solid black when active */
+}
 .modal__legend {
   margin-bottom: 12px;
   font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
@@ -90,6 +99,8 @@
   line-height: 20px;
 }
 
-.modal__label modal__label__type_radio {
-  margin-bottom: 8px;
+.modal__label.modal__label__type_radio {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between radio button and label */
 }

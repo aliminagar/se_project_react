@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.svg";
@@ -29,7 +30,9 @@ function Header({ handleAddClick, weatherData }) {
   return (
     <header className="header">
       <div className="header__left">
-        <img src={logo} alt="header logo" className="header__logo" />
+        <Link to="/">
+          <img src={logo} alt="header logo" className="header__logo" />
+        </Link>
         <p className="header__date-and-location">
           {currentDate}, {weatherData.city} -{" "}
           <span className="header__time">{formattedTime}</span>
@@ -45,8 +48,10 @@ function Header({ handleAddClick, weatherData }) {
         >
           +Add Clothes
         </button>
-        <p className="header__user-name">Terrence Tegegne</p>
-        <img src={avatar} alt="header avatar" className="header__avatar" />
+        <Link to="/profile" className="header__profile-link">
+          <p className="header__user-name">Terrence Tegegne</p>
+          <img src={avatar} alt="header avatar" className="header__avatar" />
+        </Link>
       </div>
     </header>
   );

@@ -1,41 +1,103 @@
 import { useEffect, useState } from "react";
-
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+} from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { coordinates, APIkey } from "../../utils/constants";
 import Footer from "../Footer/Footer";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import { getItems, addItem, deleteCard } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "cold",
-    temp: { F: 999 },
+    temp: { F: 999, C: 999 },
     city: "",
   });
-  const [activeModal, setAciveModal] = useState("");
-  const [selectCard, setSelectCard] = useState({});
 
+  const [clothingItems, setClothingItems] = useState([]);
+  const [activeModal, setActiveModal] = useState("");
+  const [selectCard, setSelectCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  const [name, setName] = useState("");
+  const [link, setLink] = useState(""); // Changed from imageUrl to link
+  const [weather, setWeather] = useState("");
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
   const handleCardClick = (card) => {
-    setAciveModal("preview");
+    setActiveModal("preview");
     setSelectCard(card);
   };
 
   const handleAddClick = () => {
-    setAciveModal("add-garment");
+    setActiveModal("add-garment");
   };
 
   const closeActiveModal = () => {
-    setAciveModal("");
+    setActiveModal("");
+  };
+
+  const handleWeatherChange = (e) => {
+    setWeather(e.target.value);
+  };
+
+  const handleAddItemModalSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted", name, link, weather);
+    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
+    const itemData = { name, link, weather }; // Changed from imageUrl to link
+
+    addItem(itemData)
+      .then((newItem) => {
+        setClothingItems((prevItems) => [newItem, ...prevItems]);
+        // Reset form fields
+        setName("");
+        setLink(""); // Changed from setImageUrl
+        setWeather("");
+        closeActiveModal();
+      })
+      .catch((error) => {
+        console.error(error);
+        // If API fails, add item locally
+        const newItem = { _id: newId, name, link, weather }; // Changed from imageUrl to link
+        setClothingItems((prevItems) => [newItem, ...prevItems]);
+        closeActiveModal();
+      });
+  };
+
+  const handleDeleteCard = () => {
+    if (!selectCard || !selectCard._id) {
+      console.error("No card selected for deleting");
+      return;
+    }
+
+    deleteCard(selectCard._id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== selectCard._id)
+        );
+        closeActiveModal();
+      })
+      .catch((error) => {
+        console.error(error);
+        // If API fails, delete item locally
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== selectCard._id)
+        );
+        closeActiveModal();
+      });
   };
 
   useEffect(() => {
@@ -47,6 +109,18 @@ function App() {
       .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    setClothingItems(defaultClothingItems);
+    // Uncomment this when backend is ready
+    /*
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
+    */
+  }, []);
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -54,33 +128,66 @@ function App() {
       <div className="page">
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleAddClick={handleAddClick}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+          </Routes>
+          <Footer />
         </div>
+
         <ModalWithForm
           buttonText="Add garment"
           titleText="New garment"
           activeModal={activeModal}
           handleCloseClick={closeActiveModal}
           isOpen={activeModal === "add-garment"}
+          onSubmit={handleAddItemModalSubmit}
+          name={name}
+          link={link}
+          weather={weather}
         >
           <label htmlFor="name" className="modal__label">
-            Name{" "}
+            Name
             <input
               type="text"
               className="modal__input"
               id="name"
               placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <label htmlFor="imageUrl" className="modal__label">
-            Image{" "}
+
+          <label htmlFor="link" className="modal__label">
+            Image Link
             <input
               type="text"
               className="modal__input"
-              id="imageUrl"
-              placeholder="ImageUrl"
+              id="link"
+              placeholder="Image Link"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
             />
           </label>
+
           <fieldset className="modal__radio-buttons">
             <legend className="modal__legend">Select the weather type:</legend>
             <label
@@ -92,9 +199,13 @@ function App() {
                 name="weatherRadioButton"
                 type="radio"
                 className="modal__radio-input"
+                value="hot"
+                checked={weather === "hot"}
+                onChange={handleWeatherChange}
               />
               Hot
             </label>
+
             <label
               htmlFor="Warm"
               className="modal__label modal__label__type_radio"
@@ -104,33 +215,39 @@ function App() {
                 name="weatherRadioButton"
                 type="radio"
                 className="modal__radio-input"
+                value="warm"
+                checked={weather === "warm"}
+                onChange={handleWeatherChange}
               />
               Warm
             </label>
+
             <label
               htmlFor="Cold"
               className="modal__label modal__label__type_radio"
             >
               <input
-                name="weatherRadioButton"
                 id="Cold"
+                name="weatherRadioButton"
                 type="radio"
                 className="modal__radio-input"
+                value="cold"
+                checked={weather === "cold"}
+                onChange={handleWeatherChange}
               />
               Cold
             </label>
           </fieldset>
         </ModalWithForm>
+
         <ItemModal
           activeModal={activeModal}
           card={selectCard}
           handleCloseClick={closeActiveModal}
         />
-        <Footer></Footer>
       </div>
     </CurrentTemperatureUnitContext.Provider>
   );
 }
 
 export default App;
-xxxx;

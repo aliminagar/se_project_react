@@ -1,0 +1,15 @@
+.profile {
+  display: flex;
+  padding: 20px;
+  gap: 30px;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.profile__sidebar {
+  min-width: 220px;
+}
+
+.profile__clothing-items {
+  flex-grow: 1;
+}
