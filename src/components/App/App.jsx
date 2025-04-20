@@ -11,6 +11,7 @@ import Footer from "../Footer/Footer";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { getItems, addItem, deleteCard } from "../../utils/api";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -53,7 +54,8 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
+    const newId =
+      Math.max(...clothingItems.map((item) => Number(item.id) || 0)) + 1;
     const itemData = { name, imageUrl, weather };
 
     addItem(itemData)
@@ -63,7 +65,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Failed to add item:", error);
-        const fallbackItem = { _id: newId, name, imageUrl, weather };
+        const fallbackItem = { id: newId, name, imageUrl, weather }; // 👈 fix _id to id
         setClothingItems((prevItems) => [fallbackItem, ...prevItems]);
         closeActiveModal();
       });
@@ -75,13 +77,18 @@ function App() {
   };
 
   const handleConfirmDelete = () => {
-    if (!cardToDelete || !cardToDelete._id) return;
+    if (
+      !cardToDelete ||
+      cardToDelete.id === undefined ||
+      cardToDelete.id === null
+    )
+      return;
 
     setIsLoading(true);
-    deleteCard(cardToDelete._id)
+    deleteCard(cardToDelete.id)
       .then(() => {
         setClothingItems((prev) =>
-          prev.filter((item) => item._id !== cardToDelete._id)
+          prev.filter((item) => item.id !== cardToDelete.id)
         );
         setCardToDelete(null);
         closeActiveModal();
@@ -139,17 +146,27 @@ function App() {
           <Footer author="Created by Alireza Minagar" year="2025" />
         </div>
 
+        {activeModal === "preview" && (
+          <ItemModal
+            activeModal={activeModal}
+            card={selectCard}
+            closeActiveModal={closeActiveModal}
+            onDelete={handleDeleteClick}
+          />
+        )}
+
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
           onAddItemModalSubmit={handleAddItemModalSubmit}
         />
 
-        <ItemModal
-          activeModal={activeModal}
-          card={selectCard}
-          closeActiveModal={closeActiveModal}
-          onDelete={handleDeleteClick}
+        <DeleteConfirmationModal
+          isOpen={activeModal === "confirm-delete"}
+          onClose={closeActiveModal}
+          onConfirm={handleConfirmDelete}
+          isLoading={isLoading}
+          cardName={cardToDelete?.name}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

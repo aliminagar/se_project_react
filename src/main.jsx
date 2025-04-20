@@ -6,7 +6,11 @@ import App from "./components/App/App"; // adjust path if needed
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter basename="/se_project_react">
+    <BrowserRouter
+      basename={
+        import.meta.env.MODE === "production" ? "/se_project_react" : "/"
+      }
+    >
       <App />
     </BrowserRouter>
   </React.StrictMode>
