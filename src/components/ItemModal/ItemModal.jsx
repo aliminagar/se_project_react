@@ -1,15 +1,20 @@
 import "./ItemModal.css";
+import closeButton from "../../assets/Union.png";
 
-function ItemModal({ activeModal, card, handleCloseClick }) {
+function ItemModal({ activeModal, card, closeActiveModal }) {
   return (
-    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
+    <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_image">
         <button
           type="button"
-          onClick={handleCloseClick}
+          onClick={closeActiveModal}
           className="modal__close"
-        ></button>
-        <img src={card.link} alt="modal image" className="modal__image" />
+        >
+          <img src={closeButton} alt="close" className="modal__close-icon" />
+        </button>
+
+        <img src={card.imageUrl} alt={card.name} className="modal__image" />
+
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>

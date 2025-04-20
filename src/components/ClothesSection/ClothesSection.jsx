@@ -21,7 +21,7 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
             <ItemCard
               key={item._id || item.id || item.name} // add fallbacks
               item={item}
-              handleCardClick={handleCardClick}
+              onCardClick={handleCardClick}
             />
           );
         })}
