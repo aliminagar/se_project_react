@@ -160,7 +160,6 @@ function App() {
           onClose={closeActiveModal}
           onAddItemModalSubmit={handleAddItemModalSubmit}
         />
-
         <DeleteConfirmationModal
           isOpen={activeModal === "confirm-delete"}
           onClose={closeActiveModal}
