@@ -1,7 +1,6 @@
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
-import { defaultClothingItems } from "../../utils/constants";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
@@ -9,9 +8,7 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temperature = weatherData.temp[currentTemperatureUnit]?.toFixed(1);
 
-  // Use the clothingItems from props instead of defaultClothingItems
-  const itemsToRender =
-    clothingItems.length > 0 ? clothingItems : defaultClothingItems;
+  const itemsToRender = clothingItems;
 
   return (
     <main>
@@ -26,7 +23,7 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
             .filter((item) => item.weather === weatherData.type)
             .map((item) => (
               <ItemCard
-                key={item._id}
+                key={item._id || item.id || item.name} // ✅ Fallbacks to avoid key error
                 item={item}
                 onCardClick={handleCardClick}
               />

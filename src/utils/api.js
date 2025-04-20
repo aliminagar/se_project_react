@@ -9,12 +9,16 @@ export function checkResponse(res) {
 }
 
 function addItem(itemData) {
+  const uniqueId = Date.now().toString(); // ✅ ensure a unique string id for json-server
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(itemData),
+    body: JSON.stringify({
+      ...itemData,
+      id: uniqueId, // ✅ json-server requires an 'id' field
+    }),
   }).then(checkResponse);
 }
 

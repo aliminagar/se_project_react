@@ -19,9 +19,8 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
         {clothingItems?.map((item) => {
           return (
             <ItemCard
-              key={item._id}
+              key={item._id || item.id || item.name} // add fallbacks
               item={item}
-              // todo - pass as prop
               handleCardClick={handleCardClick}
             />
           );

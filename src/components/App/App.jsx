@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import {
-  coordinates,
-  APIkey,
-  defaultClothingItems,
-} from "../../utils/constants";
+import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
@@ -110,15 +106,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setClothingItems(defaultClothingItems);
-    // Uncomment this when backend is ready
-    /*
     getItems()
       .then((data) => {
         setClothingItems(data);
       })
       .catch(console.error);
-    */
   }, []);
 
   return (
@@ -150,7 +142,7 @@ function App() {
               }
             />
           </Routes>
-          <Footer />
+          <Footer author="Created by Alireza Minagar" year="2025" />
         </div>
 
         <ModalWithForm
