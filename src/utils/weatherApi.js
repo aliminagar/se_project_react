@@ -1,6 +1,8 @@
 export const APIkey = "5874fcf6d5b890113c7aa2f97b90ea01";
 
 export const getWeather = ({ longitude, latitude }) => {
+  console.log("🚀 getWeather called with:", longitude, latitude); // Debugging line
+
   return fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
   ).then((res) => {
@@ -11,6 +13,7 @@ export const getWeather = ({ longitude, latitude }) => {
     }
   });
 };
+
 export const filterWeatherData = (data) => {
   const tempF = data.main.temp;
   const tempC = ((tempF - 32) * 5) / 9;

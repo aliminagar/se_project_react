@@ -53,7 +53,7 @@ function App() {
     setWeather(e.target.value);
   };
 
-  const handleAddItemModalSubmit = ({ name, imageUrl }) => {
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     const duplicate = clothingItems.some(
       (item) => item.name.toLowerCase().trim() === name.toLowerCase().trim()
     );
@@ -63,15 +63,20 @@ function App() {
       return;
     }
 
-    const itemData = { name, imageUrl, weather: weatherData.type };
+    const itemData = { name, imageUrl, weather };
+    console.log(
+      "✅ Adding item with this data (BEFORE sending to backend):",
+      itemData
+    ); // ✅ Add this line
 
     addItem(itemData)
       .then((newItem) => {
+        console.log("✅ Received from backend (AFTER sending):", newItem); // ✅ Add this line
         setClothingItems((prevItems) => [newItem, ...prevItems]);
         closeActiveModal();
       })
       .catch((error) => {
-        console.error("Failed to add item:", error);
+        console.error("❌ Failed to add item:", error);
         alert("Failed to add item. Please try again.");
       });
   };
@@ -105,12 +110,19 @@ function App() {
   };
 
   useEffect(() => {
+    console.log("🚀 useEffect for weather is running");
+    console.log("🛰️ Coordinates:", coordinates, "API key:", APIkey);
+
     getWeather(coordinates, APIkey)
       .then((data) => {
+        console.log("✅ RAW weather data from API:", data);
         const filteredData = filterWeatherData(data);
+        console.log("✅ Filtered weather data:", filteredData);
         setWeatherData(filteredData);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("❌ Error fetching weather data:", error);
+      });
   }, []);
 
   useEffect(() => {
