@@ -53,11 +53,17 @@ function App() {
     setWeather(e.target.value);
   };
 
-  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    const newId =
-      Math.max(...clothingItems.map((item) => Number(item.id) || 0)) + 1;
+  const handleAddItemModalSubmit = ({ name, imageUrl }) => {
+    const duplicate = clothingItems.some(
+      (item) => item.name.toLowerCase().trim() === name.toLowerCase().trim()
+    );
 
-    const itemData = { id: newId.toString(), name, imageUrl, weather }; // ✅ Add id here
+    if (duplicate) {
+      alert("Item with this name already exists!");
+      return;
+    }
+
+    const itemData = { name, imageUrl, weather: weatherData.type };
 
     addItem(itemData)
       .then((newItem) => {
@@ -66,8 +72,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Failed to add item:", error);
-        setClothingItems((prevItems) => [itemData, ...prevItems]); // Use itemData with id
-        closeActiveModal();
+        alert("Failed to add item. Please try again.");
       });
   };
 
@@ -79,21 +84,23 @@ function App() {
   const handleConfirmDelete = () => {
     if (
       !cardToDelete ||
-      cardToDelete.id === undefined ||
-      cardToDelete.id === null
-    )
+      cardToDelete._id === undefined ||
+      cardToDelete._id === null
+    ) {
+      console.error("No valid _id found for deletion:", cardToDelete);
       return;
+    }
+
+    const realId = cardToDelete._id; // ✅ Use only _id!
 
     setIsLoading(true);
-    deleteCard(cardToDelete.id)
+    deleteCard(realId)
       .then(() => {
-        setClothingItems((prev) =>
-          prev.filter((item) => item.id !== cardToDelete.id)
-        );
+        setClothingItems((prev) => prev.filter((item) => item._id !== realId));
         setCardToDelete(null);
         closeActiveModal();
       })
-      .catch((err) => console.error(err))
+      .catch((err) => console.error("Delete failed:", err))
       .finally(() => setIsLoading(false));
   };
 
@@ -109,7 +116,9 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        const sortedItems = data.sort((a, b) => Number(b.id) - Number(a.id));
+        const sortedItems = data.sort(
+          (a, b) => Number(b._id || b.id) - Number(a._id || a.id)
+        );
         setClothingItems(sortedItems);
       })
       .catch(console.error);

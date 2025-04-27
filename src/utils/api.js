@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:3001";
 
-// Handles response status
+// Check the response
 export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
@@ -10,28 +10,22 @@ function getItems() {
   return fetch(`${baseUrl}/items`).then(checkResponse);
 }
 
-// ADD a new item
+// ADD new item (using _id)
 function addItem(itemData) {
-  const uniqueId = Date.now().toString(); // generate unique ID
+  const itemWithId = { ...itemData, _id: Date.now().toString() }; // ✅ Only _id, no id
 
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...itemData,
-      id: uniqueId, // Include generated ID
-    }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(itemWithId),
   }).then(checkResponse);
 }
 
-// DELETE an item by ID
-function deleteCard(id) {
-  return fetch(`${baseUrl}/items/${id}`, {
+// DELETE by _id (correct!)
+function deleteCard(_id) {
+  return fetch(`${baseUrl}/items/${_id}`, {
     method: "DELETE",
   }).then(checkResponse);
 }
 
-// Export all
 export { getItems, deleteCard, addItem };
