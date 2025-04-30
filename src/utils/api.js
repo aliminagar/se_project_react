@@ -1,26 +1,18 @@
-const isLocal = window.location.hostname === "localhost";
-const baseUrl = "http://localhost:3001"; // used only when running locally
+const baseUrl = "http://localhost:3001";
 
 // Check the response
 export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
-// GET items
+// GET all items
 function getItems() {
-  return fetch("items.json")
-    .then(checkResponse)
-    .then((data) => data.items); // because the top-level key is "items"
+  return fetch(`${baseUrl}/items`).then(checkResponse);
 }
 
 // ADD new item (using _id)
 function addItem(itemData) {
-  if (!isLocal) {
-    alert("Adding items is disabled on the deployed site.");
-    return Promise.resolve();
-  }
-
-  const itemWithId = { ...itemData, _id: Date.now().toString() };
+  const itemWithId = { ...itemData, _id: Date.now().toString() }; // âœ… Only _id, no id
 
   return fetch(`${baseUrl}/items`, {
     method: "POST",
@@ -29,13 +21,8 @@ function addItem(itemData) {
   }).then(checkResponse);
 }
 
-// DELETE by _id
+// DELETE by _id (correct!)
 function deleteCard(_id) {
-  if (!isLocal) {
-    alert("Deleting items is disabled on the deployed site.");
-    return Promise.resolve();
-  }
-
   return fetch(`${baseUrl}/items/${_id}`, {
     method: "DELETE",
   }).then(checkResponse);
