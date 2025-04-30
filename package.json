@@ -2,6 +2,7 @@
   "name": "se_project_react",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://aliminagar.github.io/se_project_react",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.3",
+    "gh-pages": "^6.3.0",
     "json-server": "^0.16.3",
     "vite": "^5.4.10"
   }
