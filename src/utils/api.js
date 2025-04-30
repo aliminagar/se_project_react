@@ -8,7 +8,7 @@ export function checkResponse(res) {
 
 // GET items
 function getItems() {
-  return fetch("/items.json")
+  return fetch("items.json")
     .then(checkResponse)
     .then((data) => data.items); // because the top-level key is "items"
 }
