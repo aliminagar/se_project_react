@@ -1,0 +1,18 @@
+.sidebar {
+  display: flex;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+}
+
+.sidebar__username {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100%;
+  font-family: "Cabinet Grotesk Bold", "Times New Roman", Times, sans-serif;
+  margin-left: 16px;
+  width: 157px;
+  height: 25px;
+}

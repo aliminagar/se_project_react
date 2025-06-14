@@ -1,0 +1,41 @@
+.card {
+  width: 323px;
+  position: relative;
+  display: flex;
+  border: 1px solid;
+  justify-content: center;
+  border-color: rgb(0, 0, 0, 0.3);
+  border-radius: 19px;
+}
+
+.card__name {
+  margin: 0;
+  padding: 2px 12px;
+  background-color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  border-radius: 4px;
+  font-family: "Cabinet Grotesk Bold", "Times New Roman", Times, sans-serif;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.card__image {
+  width: 100%;
+  border-radius: 19px;
+}
+.card__header {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card__like-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}

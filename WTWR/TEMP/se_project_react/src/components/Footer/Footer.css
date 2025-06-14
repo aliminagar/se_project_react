@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  justify-content: flex-start; /* Change from center to flex-start to align left */
+  align-items: center; /* Keep this to maintain vertical alignment */
+  height: 40px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #000000;
+  padding: 10px;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+}

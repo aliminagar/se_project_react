@@ -1,0 +1,34 @@
+.clothes-section {
+  flex-wrap: wrap;
+}
+
+.clothes-section__content {
+  display: flex;
+  gap: 15px;
+  margin-left: 60px;
+}
+
+.clothes-section__text {
+  font-size: 20px;
+  line-height: 100%;
+  font-weight: 700;
+  font-family: "Cabinet Grotesk Bold", "Times New Roman", Times, sans-serif;
+  margin-bottom: 16px;
+}
+
+.clothes-section__add-btn {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100%;
+  font-family: "Cabinet Grotesk Bold", "Times New Roman", Times, sans-serif;
+  transition: 0.4s;
+  padding: 0;
+  margin-top: 7px;
+}
+
+.clothes-section__add-btn:hover {
+  cursor: pointer;
+  color: rgb(0, 0, 0, 0.6);
+}
