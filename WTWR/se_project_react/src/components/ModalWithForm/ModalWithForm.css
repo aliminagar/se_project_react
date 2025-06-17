@@ -1,0 +1,105 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.modal_opened {
+  visibility: visible;
+}
+
+.modal__title {
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: url("../../assets/Union.png") center no-repeat;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  background-size: cover;
+  border: none;
+}
+
+.modal__content {
+  background-color: #fff;
+  position: relative;
+  padding: 28px 28px 36px;
+  max-width: 496px;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+  align-items: flex-start; /* Change from flex-end to flex-start */
+}
+
+.modal__input {
+  display: block;
+  border: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  width: 440px;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+
+.modal__radio-buttons {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  align-items: flex-start; /* Align items to the left */
+  width: 100%; /* Ensure full width */
+}
+
+.modal_submit {
+  background: rgba(0, 0, 0, 0.3); /* Gray when inactive */
+  color: white;
+  font-weight: 700;
+  width: auto;
+  min-width: 100px;
+  max-width: 124px;
+  height: 36px;
+  padding: 0 12px;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.modal_submit.modal__submit_active {
+  background: #000 !important; /* Solid black when active */
+}
+.modal__legend {
+  margin-bottom: 12px;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__label.modal__label__type_radio {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between radio button and label */
+}
