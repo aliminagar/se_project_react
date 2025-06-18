@@ -97,3 +97,55 @@
   color: #e3342f; /* Red on hover, optional */
   opacity: 1;
 }
+
+.modal__switch-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.modal__switch-btn:hover {
+  color: #0056b3;
+}
+.modal__button-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* This creates space between the buttons */
+  margin-top: 20px;
+}
+
+.modal__submit-btn {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal__submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.modal__switch-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.modal__switch-btn:hover {
+  color: #0056b3;
+}

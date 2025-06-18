@@ -4,7 +4,12 @@ import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
+function ClothesSection({
+  clothingItems,
+  handleCardClick,
+  handleAddClick,
+  onCardLike,
+}) {
   const { currentUser } = useContext(CurrentUserContext);
 
   // Filter clothing items to show only items owned by the current user
@@ -34,9 +39,10 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
           userClothingItems.map((item) => {
             return (
               <ItemCard
-                key={item._id || item.id || item.name} // add fallbacks
+                key={item._id || item.id || item.name}
                 item={item}
                 onCardClick={handleCardClick}
+                onCardLike={onCardLike}
               />
             );
           })

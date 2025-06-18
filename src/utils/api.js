@@ -61,3 +61,25 @@ export function removeCardLike(id, token) {
     },
   }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 }
+
+// GET /users/me - Token required (Get current user profile)
+export function getProfile(token) {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
+}
+
+export function updateProfile(data, token) {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  }).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
+}

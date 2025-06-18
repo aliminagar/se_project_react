@@ -68,14 +68,15 @@ function Header({
             </button>
             <Link to="/profile" className="header__profile-link">
               <p className="header__user-name">
-                {currentUser.name ||
-                  (currentUser.email === "aminagar@gmail.com"
-                    ? "Alireza"
-                    : currentUser.email) ||
-                  "User"}
+                {currentUser &&
+                  (currentUser.name
+                    ? currentUser.name
+                    : currentUser.email
+                    ? currentUser.email
+                    : "Loading...")}
               </p>
               <img
-                src="https://images.unsplash.com/photo-1748019156345-64162e5b877e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1qaG90b3MtZmVlZHw1NXx8fGVufDB8fHx8fA%3D%3D"
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
                 alt="header avatar"
                 className="header__avatar"
                 onError={(e) => {

@@ -11,6 +11,7 @@ function ModalWithForm({
   name,
   link,
   weather,
+  customButtons = false, // Add this prop
 }) {
   // Check if all required fields are filled
   const isFormValid = name && link && weather;
@@ -29,14 +30,17 @@ function ModalWithForm({
         <h2 className="modal__title">{title}</h2>
         <form onSubmit={onSubmit} className="modal__form">
           {children}
-          <button
-            type="submit"
-            className={`modal__submit ${
-              isFormValid ? "modal__submit_active" : ""
-            }`}
-          >
-            {buttonText}
-          </button>
+          {/* Only show default button if customButtons is false */}
+          {!customButtons && (
+            <button
+              type="submit"
+              className={`modal__submit ${
+                isFormValid ? "modal__submit_active" : ""
+              }`}
+            >
+              {buttonText}
+            </button>
+          )}
         </form>
       </div>
     </div>

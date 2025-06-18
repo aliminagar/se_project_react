@@ -2,7 +2,12 @@ import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useEffect, useState } from "react";
 
-export default function RegisterModal({ isOpen, onClose, onRegister }) {
+export default function RegisterModal({
+  isOpen,
+  onClose,
+  onRegister,
+  onSwitchToLogin,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -33,11 +38,10 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
   return (
     <ModalWithForm
       title="Sign up"
-      buttonText="Next"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      disabled={!formIsValid}
+      customButtons={true} // Add this line
     >
       <label htmlFor="register-email" className="modal__label">
         Email*
@@ -87,6 +91,24 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
           onChange={handleAvatarChange}
         />
       </label>
+
+      {/* Custom button container */}
+      <div className="modal__button-container">
+        <button
+          type="submit"
+          className="modal__submit-btn"
+          disabled={!formIsValid}
+        >
+          Sign Up
+        </button>
+        <button
+          type="button"
+          className="modal__switch-btn"
+          onClick={onSwitchToLogin}
+        >
+          or Log In
+        </button>
+      </div>
     </ModalWithForm>
   );
 }

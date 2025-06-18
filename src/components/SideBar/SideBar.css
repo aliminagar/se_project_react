@@ -1,42 +1,61 @@
 .sidebar {
   display: flex;
-  flex-direction: column; /* Changed to vertical layout */
-  align-items: center; /* Center items horizontally */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
   padding: 20px;
-  gap: 16px; /* Space between elements */
+}
+
+.sidebar__user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
 }
 
 .sidebar__avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%; /* Make avatar circular */
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #007bff;
+  flex-shrink: 0;
 }
 
 .sidebar__username {
   font-size: 20px;
-  font-weight: 700;
-  line-height: 100%;
-  font-family: "Cabinet Grotesk Bold", "Times New Roman", Times, sans-serif;
-  margin: 0; /* Remove margin-left */
-  text-align: center;
-  width: auto; /* Let it size naturally */
+  font-weight: 500;
+  margin: 0;
+  color: #000;
+  flex-grow: 1;
+}
+
+.sidebar__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.sidebar__edit-btn,
+.sidebar__logout-btn {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.sidebar__edit-btn:hover,
+.sidebar__logout-btn:hover {
+  opacity: 0.6;
 }
 
 .sidebar__logout-btn {
-  background: #ff4d00;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 24px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 8px; /* Reduced margin */
-  width: 100%;
-  max-width: 200px; /* Limit button width */
-  transition: background 0.2s;
-}
-
-.sidebar__logout-btn:hover {
-  background: #cc3900;
+  margin-top: 4px;
 }

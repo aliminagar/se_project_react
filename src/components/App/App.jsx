@@ -17,12 +17,14 @@ import {
   deleteCard,
   addCardLike,
   removeCardLike,
+  updateProfile,
 } from "../../utils/api";
 import { signup, signin, checkToken } from "../../utils/auth";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal.jsx";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { getProfile } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -79,7 +81,13 @@ function App() {
     setWeather(e.target.value);
   };
 
+  // FIXED: Single, clean handleAddItemModalSubmit function
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    console.log("=== FORM VALIDATION DEBUG ===");
+    console.log("Name:", name);
+    console.log("ImageUrl:", imageUrl);
+    console.log("Weather:", weather);
+
     const duplicate = clothingItems.some(
       (item) => item.name.toLowerCase().trim() === name.toLowerCase().trim()
     );
@@ -92,14 +100,18 @@ function App() {
     const itemData = { name, imageUrl, weather };
     const token = localStorage.getItem("jwt");
 
-    console.log(
-      "Adding item with this data (BEFORE sending to backend):",
-      itemData
-    );
+    // ADD THESE TOKEN DEBUG LINES
+    console.log("=== TOKEN DEBUG ===");
+    console.log("Token exists?", !!token);
+    console.log("Token value:", token);
+    console.log("User logged in?", isLoggedIn);
+    console.log("Current user:", currentUser);
+
+    console.log("Adding item with this data:", itemData);
 
     addItem(itemData, token)
       .then((newItem) => {
-        console.log("Received from backend (AFTER sending):", newItem);
+        console.log("Received from backend:", newItem);
         setClothingItems((prevItems) => [newItem, ...prevItems]);
         closeActiveModal();
       })
@@ -187,37 +199,34 @@ function App() {
         alert("Registration failed. Please try again.");
       });
   };
-  // Clean version without emojis
+
   // Enhanced login handler with detailed debugging
   const handleLogin = (data) => {
     signin(data)
       .then((response) => {
-        console.log("=== DEBUG LOGIN RESPONSE ===");
+        console.log("=== SIGNIN RESPONSE ===");
         console.log("Full response:", response);
-        console.log("Response keys:", Object.keys(response));
-        console.log("response.name:", response.name);
-        console.log("response.user:", response.user);
-        console.log("response.data:", response.data);
-        console.log("response.email:", response.email);
-        console.log("============================");
 
         if (response.token) {
           localStorage.setItem("jwt", response.token);
-
-          // Let's try different ways to get the user data
-          const userData = response.user || response.data || response;
-          console.log("Setting currentUser to:", userData);
-
-          setCurrentUser(userData);
-          setIsLoggedIn(true);
-          setShowLogin(false);
-          console.log("JWT token stored and user logged in");
-        } else {
-          throw new Error("No token received from server");
+          console.log("Token saved, now calling getProfile...");
+          // Immediately fetch the user profile using the token
+          return getProfile(response.token);
         }
+        throw new Error("No token received from server");
+      })
+      .then((userData) => {
+        console.log("=== PROFILE DATA ===");
+        console.log("User data:", userData);
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+        setShowLogin(false);
       })
       .catch((error) => {
-        console.error("Login failed:", error);
+        console.error("=== LOGIN ERROR ===");
+        console.error("Error object:", error);
+        console.error("Error message:", error.message);
+        console.error("Error status:", error.status || error);
         alert("Login failed. Please check your credentials and try again.");
       });
   };
@@ -228,6 +237,21 @@ function App() {
     setCurrentUser(null); // Clear user data from context
     setIsLoggedIn(false);
     console.log("User logged out, JWT token removed");
+  };
+
+  const handleUpdateProfile = (profileData) => {
+    const token = localStorage.getItem("jwt");
+
+    updateProfile(profileData, token)
+      .then((updatedUser) => {
+        // Update the user context with new data
+        setCurrentUser(updatedUser);
+        console.log("Profile updated successfully:", updatedUser);
+      })
+      .catch((error) => {
+        console.error("Failed to update profile:", error);
+        alert("Failed to update profile. Please try again.");
+      });
   };
 
   useEffect(() => {
@@ -311,6 +335,7 @@ function App() {
                       clothingItems={clothingItems}
                       onCardLike={handleCardLike}
                       onLogout={handleLogout}
+                      onUpdateProfile={handleUpdateProfile}
                     />
                   </ProtectedRoute>
                 }
@@ -354,6 +379,10 @@ function App() {
             isOpen={showRegister}
             onClose={() => setShowRegister(false)}
             onRegister={handleRegister}
+            onSwitchToLogin={() => {
+              setShowRegister(false);
+              setShowLogin(true);
+            }}
           />
 
           <footer>Developed by Dr. Alireza Minagar – React Test!</footer>
