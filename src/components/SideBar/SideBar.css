@@ -1,0 +1,42 @@
+.sidebar {
+  display: flex;
+  flex-direction: column; /* Changed to vertical layout */
+  align-items: center; /* Center items horizontally */
+  padding: 20px;
+  gap: 16px; /* Space between elements */
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%; /* Make avatar circular */
+}
+
+.sidebar__username {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100%;
+  font-family: "Cabinet Grotesk Bold", "Times New Roman", Times, sans-serif;
+  margin: 0; /* Remove margin-left */
+  text-align: center;
+  width: auto; /* Let it size naturally */
+}
+
+.sidebar__logout-btn {
+  background: #ff4d00;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px; /* Reduced margin */
+  width: 100%;
+  max-width: 200px; /* Limit button width */
+  transition: background 0.2s;
+}
+
+.sidebar__logout-btn:hover {
+  background: #cc3900;
+}

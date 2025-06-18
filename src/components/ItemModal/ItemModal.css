@@ -1,0 +1,121 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Added backdrop overlay */
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* FIXED: Changed from modal__content_type_image to modal__container */
+.modal__container {
+  width: 100%;
+  max-width: 498px;
+  border-radius: 20px;
+  background-color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Also support the type variant if needed */
+.modal__container_type_image {
+  width: 100%;
+  max-width: 498px;
+  border-radius: 20px;
+  background-color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal__image {
+  width: 100%;
+  height: auto;
+  max-height: 498px;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: block;
+}
+
+.modal__footer {
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.modal__caption {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+}
+
+.modal__weather {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+}
+
+/* FIXED: Added background, color, and proper styling for close button */
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  color: #000;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 10;
+  transition: background-color 0.2s ease;
+}
+
+.modal__close:hover {
+  background-color: #f0f0f0;
+}
+
+.modal__footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.modal__delete-button {
+  background: none;
+  border: none;
+  color: #ff4d00;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal__delete-button:hover {
+  text-decoration: underline;
+}
+
+.modal__delete-button_hidden {
+  display: none;
+}

@@ -1,0 +1,99 @@
+/* Modal overlay */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__content {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.modal__close {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.modal__form label {
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+.modal__label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.modal__input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fafbfc;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  transition: border 0.2s;
+}
+
+.modal__input:focus {
+  border: 1.5px solid #2678fa;
+  outline: none;
+  background: #fff;
+}
+
+.modal__button {
+  width: 100%;
+  padding: 0.7rem 0;
+  margin-top: 1.5rem;
+  background: #2678fa;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal__button:disabled {
+  background: #dbeafe;
+  cursor: not-allowed;
+}
+/* Make the close X dark and more visible */
+.modal__close {
+  color: #222; /* Dark gray or use #000 for black */
+  font-size: 2rem; /* Bigger X for visibility */
+  font-weight: bold; /* Make it bold */
+  opacity: 0.8; /* A little transparency, or set to 1 for solid */
+  transition: color 0.2s;
+  cursor: pointer;
+  position: absolute; /* Usually already set */
+  top: 24px; /* Adjust if needed */
+  right: 24px; /* Adjust if needed */
+  background: none; /* Remove default button styles */
+  border: none;
+  z-index: 10;
+}
+
+.modal__close:hover {
+  color: #e3342f; /* Red on hover, optional */
+  opacity: 1;
+}
