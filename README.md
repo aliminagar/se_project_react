@@ -1,86 +1,119 @@
-# WTWR (What to Wear) 🌦️👕🧣
+WTWR (What to Wear) 🌦️👕🧣
+🚀 Live Demo
+Check out the project here:
+What to Wear - Weather Station
 
-## 🚀 Live Demo
+📝 Overview
+WTWR (What to Wear) is a full-stack, dynamic web application that provides clothing recommendations based on real-time weather data. Users can personalize their wardrobe, add or delete items, and receive suggestions powered by live weather info—all through a seamless, responsive UI.
 
-Check out the project here:  
-[What to Wear - Weather Station](https://aliminagar.github.io/se_project_react/)
+🛠️ Features
+🌡️ Real-time Weather Data: Fetches live weather information via the OpenWeather API.
 
----
+👕 Clothing Recommendations: Suggests garments based on weather conditions.
 
-## 📝 Overview
+➕ Add/Delete Clothing Items: Authenticated users manage their wardrobe.
 
-**WTWR (What to Wear)** is a dynamic, responsive web application designed to provide **clothing recommendations based on real-time weather data**. By leveraging the **OpenWeather API**, the app fetches live weather details for a user's location and suggests suitable clothing items. Additionally, users can personalize their wardrobe by adding or deleting items, all managed through an intuitive user interface.
+👍 Like/Unlike Clothing Items: Logged-in users can like or unlike any item.
 
----
+🧑‍💻 User Registration & Authorization: Secure sign-up, sign-in, and JWT-protected API calls.
 
-## 🛠️ Features
+📝 Edit Profile: Users can update their name and avatar.
 
-- 🌡️ **Real-time Weather Data**: Fetches live weather information based on user geolocation.
-- 👕 **Clothing Recommendations**: Suggests garments appropriate for current weather conditions.
-- ➕ **Add/Delete Clothing Items**: Users can manage their wardrobe through a simple form.
-- 🌀 **Smooth State Management**: Utilizes **React Hooks** for seamless component updates.
-- 📱 **Responsive Design**: Optimized layout for various screen sizes.
-- ⚡ **Fast Performance**: Powered by **Vite**, ensuring rapid development and build times.
+🔒 Protected Routes: Only authorized users can access the profile page and item management.
 
----
+📱 Responsive Design: Mobile-friendly and optimized for all devices.
 
-## 🧩 Technologies Used
+⚡ Fast Performance: Powered by Vite and React Router v6.
 
-- **React (with Hooks)**
-- **Vite (for fast development and builds)**
-- **CSS (for styling and layout)**
-- **OpenWeather API** (for weather data retrieval)
-- **JSON Server** (for mock backend and data persistence)
+🧩 Technologies Used
+React (Hooks, Context API, Router v6)
 
----
+Vite (for rapid development/builds)
 
-## 📸 Screenshots
+CSS (custom styling)
 
-### 1️⃣ **Add Clothes Popup**
+OpenWeather API (weather data)
 
-The interface where users add new clothing items by specifying the name, image URL, and weather category.
-![Add Clothes Popup](src/assets/Add_clothes_popup.png)
+Express & MongoDB (backend, authentication, data persistence)
 
-### 2️⃣ **Garment Preview**
+JWT (authorization)
 
-Preview of added garments showing their details.
-![Garment Preview](src/assets/Garment_popup_v1.png)
+Node.js
 
-### 3️⃣ **Main Page**
+GitHub Actions (optional, for CI/CD)
 
-Displays real-time weather info and clothing recommendations.
-![Main Page](src/assets/Main_1440px.png)
+🌐 Backend Repository
+You must run the backend locally for full functionality.
+All API endpoints, authentication, and data are managed by the backend.
 
----
+👉 Backend Express + MongoDB repo:
+https://github.com/alimnagar/se_project_express
 
-## ⚙️ How It Works
+Please refer to the backend’s own README for full setup and API usage instructions.
 
-### 🔎 Weather Data Retrieval
+⚙️ Getting Started
 
-- Uses the **OpenWeather API** to fetch weather data via geolocation.
-- Retrieves **temperature, conditions, and location name**.
+1. Clone the Repositories
+   bash
+   Copy
+   Edit
+   git clone https://github.com/alimnagar/se_project_react
+   git clone https://github.com/alimnagar/se_project_express
+2. Install Dependencies and Start Servers
+   Backend:
 
-### 👕 Clothing Recommendation Logic
+cd se_project_express
+npm install
+npm start
+Frontend:
 
-- Filters clothing items based on the selected **weather category** (hot, warm, cold).
-- Displays items that match the current temperature range.
+cd se_project_react
+npm install
+npm run dev
+By default, the backend runs on localhost:3001 and frontend on localhost:3000 (or as set in your .env).
 
-### 🧑‍💻 User Interaction
+3. Configure API URL
+   Make sure your frontend API requests point to your local backend (e.g. http://localhost:3001).
 
-- **Add Clothing Item**: Opens a modal where the user can add:
-  - Item name
-  - Image URL
-  - Weather type
-- **Delete Clothing Item**: Removes the selected item from the wardrobe.
+Set the backend URL in your frontend .env or API utility as required.
 
----
+4. Start MongoDB
+   Ensure your MongoDB service is running locally (mongod process).
 
-## 🛠️ Backend Setup (JSON Server)
+🔑 Authentication & Authorization
+Register and log in with email, name, avatar, and password.
 
-The application uses **JSON Server** to simulate a backend for storing clothing items.
+JWT token is stored in localStorage and attached to all authorized requests.
 
-### Start JSON Server:
+Protected routes (e.g., /profile) are only accessible to logged-in users.
 
-```bash
-npx json-server --watch db.json --port 3001
-```
+Only the item’s owner can delete their items.
+
+💡 Project Highlights & New Features
+Switched to React Router v6 and Vite for improved speed and modern routing.
+
+Full user auth: Registration, login, sign out, JWT-based API protection.
+
+CurrentUserContext: React Context to provide user info app-wide.
+
+Profile Editing: Change your avatar and display name.
+
+Likes: Users can like/unlike clothing items; like state is persistent.
+
+Item Ownership: Only item owners see the delete button for their items.
+
+Legacy data handling: Updated backend logic ensures robust ownership and security for new and old items.
+
+🛠️ Backend Setup (for reviewers)
+Please download the backend [https://github.com/alimnagar/se_project_express](https://github.com/alimnagar/se_project_express) here.
+
+Follow instructions in the backend’s README to start the server (Express + MongoDB).
+
+Make sure both frontend and backend are running and accessible for full app functionality.
+
+🧑‍💻 Developer Notes
+Both frontend and backend must be running locally for all features to work.
+
+If you have any trouble or need to review specific features, please check the source code or reach out via GitHub issues.
+
+Thank you for reviewing WTWR!
