@@ -1,66 +1,70 @@
 WTWR (What to Wear) 🌦️👕🧣
 🚀 Live Demo
 Check out the project here:
-What to Wear - Weather Station
+What to Wear – Weather Station
 
 📝 Overview
-WTWR (What to Wear) is a full-stack, dynamic web application that provides clothing recommendations based on real-time weather data. Users can personalize their wardrobe, add or delete items, and receive suggestions powered by live weather info—all through a seamless, responsive UI.
+WTWR (What to Wear) is a full-stack web application that recommends clothing based on live weather data. Users can register, personalize their wardrobe, manage items, and receive smart outfit suggestions—all in a modern, mobile-responsive UI.
 
 🛠️ Features
-🌡️ Real-time Weather Data: Fetches live weather information via the OpenWeather API.
+🌡️ Real-time Weather Data: Uses OpenWeather API for live weather updates.
 
-👕 Clothing Recommendations: Suggests garments based on weather conditions.
+👕 Clothing Recommendations: Suggests appropriate garments by current conditions.
 
-➕ Add/Delete Clothing Items: Authenticated users manage their wardrobe.
+➕ Add/Delete Clothing Items: Authenticated users can manage wardrobe items.
 
-👍 Like/Unlike Clothing Items: Logged-in users can like or unlike any item.
+👍 Like/Unlike Clothing: Users can like/unlike any item.
 
-🧑‍💻 User Registration & Authorization: Secure sign-up, sign-in, and JWT-protected API calls.
+🧑‍💻 Registration & Authorization: Secure JWT-based sign-up/sign-in.
 
-📝 Edit Profile: Users can update their name and avatar.
+📝 Edit Profile: Update your name and avatar.
 
-🔒 Protected Routes: Only authorized users can access the profile page and item management.
+🔒 Protected Routes: Item management and profile available to authorized users only.
 
-📱 Responsive Design: Mobile-friendly and optimized for all devices.
+📱 Responsive Design: Mobile-friendly, optimized for all devices.
 
-⚡ Fast Performance: Powered by Vite and React Router v6.
+⚡ Fast Performance: Built with Vite and React Router v6.
 
 🧩 Technologies Used
+Frontend:
+
 React (Hooks, Context API, Router v6)
 
-Vite (for rapid development/builds)
+Vite
 
 CSS (custom styling)
 
-OpenWeather API (weather data)
+OpenWeather API
 
-Express & MongoDB (backend, authentication, data persistence)
+Backend:
 
-JWT (authorization)
+Express.js
+
+MongoDB
+
+JWT for authentication
 
 Node.js
+
+DevOps:
 
 GitHub Actions (optional, for CI/CD)
 
 🌐 Backend Repository
-You must run the backend locally for full functionality.
-All API endpoints, authentication, and data are managed by the backend.
+All API endpoints, authentication, and data are handled by the backend.
+Backend (Express + MongoDB) repository:
+https://github.com/aliminagar/se_project_express.git
 
-👉 Backend Express + MongoDB repo:
-https://github.com/alimnagar/se_project_express
-
-Please refer to the backend’s own README for full setup and API usage instructions.
+See the backend’s README for full setup and API details.
 
 ⚙️ Getting Started
+Clone the Repositories
 
-1. Clone the Repositories
-   bash
-   Copy
-   Edit
-   git clone https://github.com/alimnagar/se_project_react
-   git clone https://github.com/alimnagar/se_project_express
-2. Install Dependencies and Start Servers
-   Backend:
+git clone https://github.com/aliminagar/se_project_react
+git clone https://github.com/aliminagar/se_project_express.git
+Install Dependencies and Start Servers
+
+Backend:
 
 cd se_project_express
 npm install
@@ -70,50 +74,51 @@ Frontend:
 cd se_project_react
 npm install
 npm run dev
-By default, the backend runs on localhost:3001 and frontend on localhost:3000 (or as set in your .env).
+By default, the backend runs on localhost:3001 and the frontend on localhost:3000 (or as set in your .env).
 
-3. Configure API URL
-   Make sure your frontend API requests point to your local backend (e.g. http://localhost:3001).
+Configure API URL
 
-Set the backend URL in your frontend .env or API utility as required.
+Ensure your frontend API points to your backend (e.g., http://localhost:3001).
+Set the backend URL in your frontend .env or API utility as needed.
 
-4. Start MongoDB
-   Ensure your MongoDB service is running locally (mongod process).
+Start MongoDB
+
+Make sure your local MongoDB service is running (e.g., via mongod).
 
 🔑 Authentication & Authorization
 Register and log in with email, name, avatar, and password.
 
-JWT token is stored in localStorage and attached to all authorized requests.
+JWT token stored in localStorage and used for all protected requests.
 
-Protected routes (e.g., /profile) are only accessible to logged-in users.
+Protected routes (e.g., /profile) are for authenticated users only.
 
-Only the item’s owner can delete their items.
+Only item owners can delete their clothing items.
 
 💡 Project Highlights & New Features
-Switched to React Router v6 and Vite for improved speed and modern routing.
+Switched to React Router v6 and Vite for modern speed and routing.
 
-Full user auth: Registration, login, sign out, JWT-based API protection.
+Full user authentication: registration, login, logout, JWT-protected APIs.
 
-CurrentUserContext: React Context to provide user info app-wide.
+CurrentUserContext: app-wide user info via React Context.
 
-Profile Editing: Change your avatar and display name.
+Profile editing: avatar and display name changes.
 
-Likes: Users can like/unlike clothing items; like state is persistent.
+Like/unlike items (state persists).
 
-Item Ownership: Only item owners see the delete button for their items.
+Only owners can delete their own items.
 
-Legacy data handling: Updated backend logic ensures robust ownership and security for new and old items.
+Legacy and new data handling: robust ownership & security logic.
 
 🛠️ Backend Setup (for reviewers)
-Please download the backend [https://github.com/alimnagar/se_project_express](https://github.com/alimnagar/se_project_express) here.
+Download the backend here:
+https://github.com/aliminagar/se_project_express.git
 
 Follow instructions in the backend’s README to start the server (Express + MongoDB).
-
-Make sure both frontend and backend are running and accessible for full app functionality.
+Both frontend and backend must be running locally for full app functionality.
 
 🧑‍💻 Developer Notes
-Both frontend and backend must be running locally for all features to work.
+Both frontend and backend must be running for all features to work.
 
-If you have any trouble or need to review specific features, please check the source code or reach out via GitHub issues.
+For issues or to review specific features, check the codebase or submit via GitHub issues.
 
 Thank you for reviewing WTWR!

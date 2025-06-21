@@ -33,6 +33,9 @@ function App() {
     city: "",
   });
 
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectCard, setSelectCard] = useState({});
@@ -46,8 +49,6 @@ function App() {
   const [cardToDelete, setCardToDelete] = useState(null);
 
   // New state variables for login/register modals
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
 
   // Add isLoggedIn state for authentication (already exists!)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -177,22 +178,12 @@ function App() {
     }
   };
 
-  // Enhanced registration handler
   const handleRegister = (data) => {
     signup(data)
       .then((response) => {
-        console.log("Registration successful:", response);
-
-        if (response.token) {
-          localStorage.setItem("jwt", response.token);
-        }
-
-        // Set user data in context
-        setCurrentUser(response.user || response);
-        setIsLoggedIn(true);
+        handleLogin(data);
         setShowRegister(false);
-
-        console.log("User automatically signed in after registration");
+        console.log("Registration completed!");
       })
       .catch((error) => {
         console.error("Registration failed:", error);
@@ -374,6 +365,10 @@ function App() {
             isOpen={showLogin}
             onClose={() => setShowLogin(false)}
             onLogin={handleLogin}
+            onOpenSignUp={() => {
+              setShowLogin(false);
+              setShowRegister(true);
+            }}
           />
           <RegisterModal
             isOpen={showRegister}

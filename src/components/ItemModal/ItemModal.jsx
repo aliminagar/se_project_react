@@ -5,8 +5,13 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function ItemModal({ activeModal, card, closeActiveModal, onDelete }) {
   const { currentUser } = useContext(CurrentUserContext);
 
+  console.log("card:", card);
+  console.log("currentUser:", currentUser);
   // Check if the current user is the owner of the current clothing item
-  const isOwn = currentUser && card.owner === currentUser._id;
+  const isOwn =
+    Boolean(currentUser) &&
+    (card.owner === currentUser._id ||
+      String(card.owner) === String(currentUser._id));
 
   const handleDeleteClick = () => {
     onDelete(card);

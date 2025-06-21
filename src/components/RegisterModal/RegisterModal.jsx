@@ -41,7 +41,7 @@ export default function RegisterModal({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      customButtons={true} // Add this line
+      customButtons={true}
     >
       <label htmlFor="register-email" className="modal__label">
         Email*
@@ -92,21 +92,23 @@ export default function RegisterModal({
         />
       </label>
 
-      {/* Custom button container */}
-      <div className="modal__button-container">
+      {/* Both buttons in the same container - matching LoginModal */}
+      <div className="modal__actions">
         <button
           type="submit"
-          className="modal__submit-btn"
+          className="modal__button"
           disabled={!formIsValid}
+          onClick={handleSubmit}
         >
           Sign Up
         </button>
+        <span>or</span>
         <button
           type="button"
-          className="modal__switch-btn"
+          className="modal__signup-btn"
           onClick={onSwitchToLogin}
         >
-          or Log In
+          Log In
         </button>
       </div>
     </ModalWithForm>

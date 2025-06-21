@@ -53,19 +53,22 @@
 
 .modal__input {
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  padding: 0.5rem 0;
+  border: none !important;
+  border-bottom: 2px solid #222 !important; /* Dark underline */
+  border-radius: 0 !important;
   font-size: 1rem;
-  background: #fafbfc;
+  background: #fff;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-  transition: border 0.2s;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-bottom-color 0.2s;
 }
 
 .modal__input:focus {
-  border: 1.5px solid #2678fa;
-  outline: none;
+  border-bottom: 2px solid #2678fa !important; /* Blue highlight on focus */
+  outline: none !important;
   background: #fff;
 }
 
@@ -86,4 +89,39 @@
 .modal__button:disabled {
   background: #dbeafe;
   cursor: not-allowed;
+}
+
+.modal__actions {
+  display: flex;
+  flex-direction: row; /* Force horizontal layout */
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+.modal__actions .modal__button {
+  width: auto; /* Override the 100% width for buttons inside actions */
+  padding: 0.7rem 1.5rem; /* Add horizontal padding */
+  margin-top: 0; /* Remove margin since actions already has margin */
+}
+
+.modal__actions span {
+  color: #666;
+  font-weight: 500;
+}
+
+.modal__signup-btn {
+  background: none;
+  border: none;
+  color: #2678fa;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 1rem;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.modal__signup-btn:hover {
+  color: #0b48b2;
 }

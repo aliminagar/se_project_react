@@ -59,3 +59,25 @@
 .sidebar__logout-btn {
   margin-top: 4px;
 }
+.sidebar__avatar-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.sidebar__avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #2678fa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -76,7 +76,11 @@ function Header({
                     : "Loading...")}
               </p>
               <img
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
+                src={
+                  currentUser?.avatar
+                    ? `${currentUser.avatar}?v=${currentUser._id || Date.now()}`
+                    : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
+                }
                 alt="header avatar"
                 className="header__avatar"
                 onError={(e) => {

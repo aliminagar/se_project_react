@@ -2,7 +2,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useEffect, useState } from "react";
 import "./LoginModal.css";
 
-export default function LoginModal({ isOpen, onClose, onLogin }) {
+export default function LoginModal({ isOpen, onClose, onLogin, onOpenSignUp }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,11 +26,10 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
   return (
     <ModalWithForm
       title="Log in"
-      buttonText="Log in"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      disabled={!formIsValid}
+      customButtons={true}
     >
       <label htmlFor="login-email" className="modal__label">
         Email*
@@ -56,6 +55,26 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
           onChange={handlePasswordChange}
         />
       </label>
+
+      {/* Both buttons in the same container */}
+      <div className="modal__actions">
+        <button
+          type="submit"
+          className="modal__button"
+          disabled={!formIsValid}
+          onClick={handleSubmit}
+        >
+          Log in
+        </button>
+        <span>or</span>
+        <button
+          type="button"
+          className="modal__signup-btn"
+          onClick={onOpenSignUp}
+        >
+          Sign Up
+        </button>
+      </div>
     </ModalWithForm>
   );
 }
