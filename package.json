@@ -15,7 +15,8 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.0",
+    "react-router": "^7.12.0",
+    "react-router-dom": "^7.12.0",
     "se_project_react": "file:"
   },
   "devDependencies": {
