@@ -3,6 +3,6 @@
     "json-server": "^1.0.0-beta.3"
   },
   "dependencies": {
-    "react-router-dom": "^7.12.0"
+    "react-router-dom": "^7.16.0"
   }
 }
